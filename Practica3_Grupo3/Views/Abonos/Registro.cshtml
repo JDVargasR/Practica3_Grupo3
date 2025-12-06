@@ -1,0 +1,47 @@
+﻿@model Practica3_Grupo3.Models.AbonoModel
+@{
+    Layout = "~/Views/Shared/_LayoutInterno.cshtml";
+}
+
+<h4 class="fw-bold mb-4">Registro de Abonos</h4>
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-danger text-center">@ViewBag.Mensaje</div>
+}
+
+<div class="card shadow-sm border-0 p-4">
+
+    @using (Html.BeginForm("Registro", "Abonos", FormMethod.Post))
+    {
+        <div class="mb-3">
+            <label class="form-label fw-bold">Compra:</label>
+            @Html.DropDownList("Id_Compra",
+                (IEnumerable<SelectListItem>)ViewBag.ListaCompras,
+                new { @class = "form-select", @id = "ddlCompras" })
+        </div>
+
+        <button type="button" id="btnConsultar" class="btn btn-secondary mb-4">
+            Consultar Saldo
+        </button>
+
+        <div class="mb-3">
+            <label class="form-label fw-bold">Saldo Anterior:</label>
+            <input type="text" id="SaldoAnterior" name="SaldoAnterior"
+                   class="form-control" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-bold">Monto del Abono:</label>
+            <input type="number" step="0.01" name="MontoAbono" class="form-control" required />
+        </div>
+
+        <button type="submit" class="btn btn-success w-100 mt-3">
+            Registrar Abono
+        </button>
+    }
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script src="~/StaticFiles/js/Abonos.js"></script>
